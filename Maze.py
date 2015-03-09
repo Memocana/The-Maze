@@ -5,9 +5,7 @@ from Leap import CircleGesture, KeyTapGesture, ScreenTapGesture, SwipeGesture
 
 #Serial Connection
 
-port = '/dev/ttyS0'
-
-serialPort = serial.Serial(port,9600)
+serialPort = Serial('/dev/ttyACM0', 9600)
 
 
 #Listener

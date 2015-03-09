@@ -7,18 +7,18 @@ void setup() {
   Serial.begin(9600);
   x_axis.attach(A0);
   z_axis.attach(A1);
-  x_axis.write(90);
-  z_axis.write(90);
+  x_axis.write(50);
+  z_axis.write(0);
 }
 
 void loop() {
   if (Serial.available() > 0) {
     incomingByte = Serial.readStringUntil('\n');
-    String xpos = incomingByte.substring(incomingByte.indexOf(':')+1);
+    int xpos = (incomingByte.substring(incomingByte.indexOf(':')+1)).toInt();
     incomingByte = Serial.readStringUntil('\n');
-    String zpos = incomingByte.substring(incomingByte.indexOf(':')+1);
-    x_axis.write(int(xpos));
-    z_axis.write(int(zpos));
+    int zpos = (incomingByte.substring(incomingByte.indexOf(':')+1)).toInt();
+    x_axis.write(xpos);
+    z_axis.write(zpos);
   }
   delay(25);
 }
