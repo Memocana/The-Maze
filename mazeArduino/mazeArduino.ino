@@ -5,20 +5,23 @@ String incomingByte = "";
 
 void setup() {
   Serial.begin(9600);
-  x_axis.attach(A0);
-  z_axis.attach(A1);
-  x_axis.write(100);
-  z_axis.write(0);
+  x_axis.attach(9);
+  z_axis.attach(8);
+  x_axis.write(90);
+  z_axis.write(90);
 }
+
 
 void loop() {
   if (Serial.available() > 0) {
     incomingByte = Serial.readStringUntil('\n');
-    int xpos = (incomingByte.substring(incomingByte.indexOf(':')+1)).toInt();
-    Serial.println(xpos);
-    /*incomingByte = Serial.readStringUntil('\n');
-    int zpos = (incomingByte.substring(incomingByte.indexOf(':')+1)).toInt();*/
-    x_axis.write(xpos);
-    //z_axis.write(zpos);
+    int xpos = incomingByte.toInt();
+    //Serial.println(xpos);
+    incomingByte = Serial.readStringUntil('\n');
+    int zpos = incomingByte.toInt();
+    //Serial.println(zpos);
+    x_axis.write(180-xpos);
+    z_axis.write(180-zpos);
+    delay(10);
   }
 }
